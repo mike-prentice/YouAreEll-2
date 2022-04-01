@@ -13,6 +13,7 @@ public class YouAreEll {
     public static void main(String[] args) {
         ServerController serverController = ServerController.shared();
         serverController.idGet();
+        serverController.messageGet();
         // hmm: is this Dependency Injection?
 //        YouAreEll urlhandler = new YouAreEll(
 //            new TransactionController(
