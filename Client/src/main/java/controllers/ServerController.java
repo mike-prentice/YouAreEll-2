@@ -37,7 +37,7 @@ public class ServerController<JsonString> {
             con.setReadTimeout(5000);
 
             int status = con.getResponseCode();
-            System.out.println(status);
+            //System.out.println(status);
 
             if (status > 299) {
                 reader = new BufferedReader((new InputStreamReader(con.getErrorStream())));
@@ -86,7 +86,7 @@ public class ServerController<JsonString> {
                 reader = new BufferedReader((new InputStreamReader(con.getErrorStream())));
                 Object obj = jsonParser.parse(reader);
                 messages = (JSONArray) obj;
-                System.out.println(messages);
+                //System.out.println(messages);
                 reader.close();
             } else {
                 reader = new BufferedReader((new InputStreamReader(con.getInputStream())));
