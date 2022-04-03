@@ -14,11 +14,12 @@ import java.net.URL;
 public class ServerController<JsonString> {
     HttpURLConnection con;
 
-    private String rootURL = "http://zipcode.rocks:8085";
+    private final String rootURL = "http://zipcode.rocks:8085";
 
-    private static ServerController svr = new ServerController();
+    private static final ServerController svr = new ServerController();
 
-    private ServerController() {}
+    private ServerController() {
+    }
 
     public static ServerController shared() {
         return svr;
@@ -29,27 +30,24 @@ public class ServerController<JsonString> {
         JSONParser jsonParser = new JSONParser();
         JSONArray ids = null;
         try {
-            URL url = new URL(rootURL+ "/ids");
-             con = (HttpURLConnection) url.openConnection();
+            URL url = new URL(rootURL + "/ids");
+            con = (HttpURLConnection) url.openConnection();
             //Request Method
             con.setRequestMethod("GET");
             con.setConnectTimeout(5000);
             con.setReadTimeout(5000);
 
             int status = con.getResponseCode();
-            System.out.println(status);
 
             if (status > 299) {
                 reader = new BufferedReader((new InputStreamReader(con.getErrorStream())));
                 Object obj = jsonParser.parse(reader);
                 ids = (JSONArray) obj;
-                //System.out.println(ids);
                 reader.close();
             } else {
                 reader = new BufferedReader((new InputStreamReader(con.getInputStream())));
                 Object obj = jsonParser.parse(reader);
                 ids = (JSONArray) obj;
-                System.out.println(ids);
                 reader.close();
 
             }
@@ -72,7 +70,7 @@ public class ServerController<JsonString> {
         JSONParser jsonParser = new JSONParser();
         JSONArray messages = null;
         try {
-            URL url = new URL(rootURL+"/messages");
+            URL url = new URL(rootURL + "/messages");
             con = (HttpURLConnection) url.openConnection();
             //Request Method
             con.setRequestMethod("GET");
@@ -80,19 +78,16 @@ public class ServerController<JsonString> {
             con.setReadTimeout(5000);
 
             int status = con.getResponseCode();
-            System.out.println(status);
 
             if (status > 299) {
                 reader = new BufferedReader((new InputStreamReader(con.getErrorStream())));
                 Object obj = jsonParser.parse(reader);
                 messages = (JSONArray) obj;
-                //System.out.println(messages);
                 reader.close();
             } else {
                 reader = new BufferedReader((new InputStreamReader(con.getInputStream())));
                 Object obj = jsonParser.parse(reader);
                 messages = (JSONArray) obj;
-                //System.out.println(messages);
                 reader.close();
 
             }
@@ -111,8 +106,8 @@ public class ServerController<JsonString> {
     }
 
     // url -> /ids/
-        // send the server a get with url
-        // return json from server
+    // send the server a get with url
+    // return json from server
 //    }
 //    public JsonString idPost(Id) {
 //        // url -> /ids/

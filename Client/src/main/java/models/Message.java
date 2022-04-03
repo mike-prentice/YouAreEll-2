@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 /* 
  * POJO for an Message object
  *
@@ -34,7 +34,7 @@ public class Message implements Comparable {
     @JsonProperty("sequence")
     private String seqId = "";
 
-    public Message (String message, String fromId, String toId, String timestamp, String sequence) {
+    public Message(String message, String fromId, String toId, String timestamp, String sequence) {
         this.message = message;
         this.fromId = fromId;
         this.toId = toId;
@@ -42,16 +42,18 @@ public class Message implements Comparable {
         this.seqId = sequence;
     }
 
-    public Message (String message, String fromId) {
+    public Message(String message, String fromId) {
         this.message = message;
         this.fromId = fromId;
         this.toId = "";
     }
-    public Message(){}
+
+    public Message() {
+    }
 
     @Override
     public String toString() {
-        return seqId +"\n" + "to: " + this.toId + "\nfrom: "+ this.fromId + "\n" + this.message + "\n----\n";
+        return seqId + "\n" + "to: " + this.toId + "\nfrom: " + this.fromId + "\n" + this.message + "\n----\n";
     }
 
     public int compareTo(Object o) {

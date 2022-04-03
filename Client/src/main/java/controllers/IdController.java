@@ -11,29 +11,21 @@ import models.Id;
 import org.json.simple.JSONArray;
 
 public class IdController {
-    private HashMap<String, Id> allIds;
-    private ArrayList<Id> gatherIds;
-    private ServerController serverController;
+    private final HashMap<String, Id> allIds = new HashMap<>();
+
     Id myId;
 
-    public IdController(ServerController serverController) throws JsonProcessingException {
-        this.gatherIds = new ArrayList<Id>();
-        this.myId = null;
-        this.serverController = serverController;
-        getIds();
-    }
-
     public ArrayList<Id> getIds() throws JsonProcessingException {
+        ServerController serverController = ServerController.shared();
         String getIds = String.valueOf(serverController.idGet());
         ObjectMapper objectMapper = new ObjectMapper();
-        gatherIds = objectMapper.readValue(getIds, new TypeReference<ArrayList<Id>>() {});
-        allIds = objectMapper.readValue(getIds, new TypeReference<HashMap<String, Id>>() {});
-        System.out.println(gatherIds);
-
-        for (Map.Entry<String, Id> entry : allIds.entrySet()){
-            System.out.println(entry.getKey() + " = " + entry.getValue());
+        ArrayList<Id> ids = new ArrayList<>();
+        ids = objectMapper.readValue(getIds, new TypeReference<>() {
+        });
+        for (Id i : ids) {
+            allIds.put(i.getUid(), i);
         }
-        return gatherIds;
+        return ids;
     }
 
     public Id postId(Id id) {
@@ -47,5 +39,5 @@ public class IdController {
     public Id putId(Id id) {
         return null;
     }
- 
+
 }

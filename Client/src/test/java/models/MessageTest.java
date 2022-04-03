@@ -7,28 +7,17 @@ import junit.framework.TestCase;
 import org.json.simple.JSONArray;
 
 public class MessageTest extends TestCase {
-    ServerController serverController = ServerController.shared();
-    JSONArray messages = ServerController.shared().messageGet();
-    String messageStr = messages.toString();
-    ObjectMapper objectMapper = new ObjectMapper();
-    Message[] message = objectMapper.readValue(messageStr, Message[].class);
-    Message messageget = new Message();
 
-    public MessageTest() throws JsonProcessingException {
+    public MessageTest()  {
     }
 
     public void testTestToString() {
-
-
     }
 
     public void testCompareTo() {
     }
 
     public void testGetMessage() {
-
-        String actual = messageget.getMessage();
-        System.out.println(actual);
     }
 
     public void testSetMessage() {

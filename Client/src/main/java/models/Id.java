@@ -7,15 +7,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Id {
     @JsonProperty("userid")
-    private String uid = "";
+    private final String uid = "";
     @JsonProperty("name")
     private String name = "";
     @JsonProperty("github")
     private String github = "";
 
-    public Id (String name, String githubId) {}
+    public Id(String name, String githubId) {
+    }
 
-    public Id (){}
+    public Id() {
+    }
 
     public String getUid() {
         return uid;
