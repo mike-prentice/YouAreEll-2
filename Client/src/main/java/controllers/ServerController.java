@@ -43,13 +43,13 @@ public class ServerController<JsonString> {
                 reader = new BufferedReader((new InputStreamReader(con.getErrorStream())));
                 Object obj = jsonParser.parse(reader);
                 ids = (JSONArray) obj;
-                System.out.println(ids);
+                //System.out.println(ids);
                 reader.close();
             } else {
                 reader = new BufferedReader((new InputStreamReader(con.getInputStream())));
                 Object obj = jsonParser.parse(reader);
                 ids = (JSONArray) obj;
-                System.out.println(ids);
+                //System.out.println(ids);
                 reader.close();
 
             }

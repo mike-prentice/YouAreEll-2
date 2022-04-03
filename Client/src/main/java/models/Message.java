@@ -1,5 +1,15 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 /* 
  * POJO for an Message object
  *
@@ -19,14 +29,14 @@ public class Message implements Comparable {
     private String toId = "";
     private String fromId = "";
     private String timestamp = "";
-    private String seqId = "";
+    private String sequence = "";
 
-    public Message (String message, String fromId, String toId, String timestamp, String seqId) {
+    public Message (String message, String fromId, String toId, String timestamp, String sequence) {
         this.message = message;
         this.fromId = fromId;
         this.toId = toId;
         this.timestamp = timestamp;
-        this.seqId = seqId;
+        this.sequence = sequence;
     }
 
     public Message (String message, String fromId) {
@@ -34,6 +44,7 @@ public class Message implements Comparable {
         this.fromId = fromId;
         this.toId = "";
     }
+    public Message(){}
 
     @Override
     public String toString() {
@@ -41,7 +52,7 @@ public class Message implements Comparable {
     }
 
     public int compareTo(Object o) {
-        return this.seqId.compareTo(((Message) o).getSeqId());
+        return this.sequence.compareTo(((Message) o).getSeqId());
     }
 
     public String getMessage() {
@@ -73,6 +84,6 @@ public class Message implements Comparable {
     }
 
     public String getSeqId() {
-        return seqId;
+        return sequence;
     }
 }
