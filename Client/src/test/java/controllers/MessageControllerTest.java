@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.TestCase;
+import models.Id;
 import models.Message;
 import org.json.simple.JSONArray;
 
@@ -22,9 +23,10 @@ public class MessageControllerTest extends TestCase {
         ObjectMapper objectMapper = new ObjectMapper();
         Message[] message;
         message = objectMapper.readValue(messageStr, Message[].class);
-        System.out.println(Arrays.toString(message));
+        System.out.println(message);
 //        MessageController messageController = MessageController.shared();
 //        messageController.getMessages();
+//        messageController.getMessagesForId(sreilly);
 
         }
 

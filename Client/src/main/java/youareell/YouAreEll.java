@@ -1,5 +1,6 @@
 package youareell;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import controllers.*;
 
 public class YouAreEll {
@@ -10,10 +11,12 @@ public class YouAreEll {
         this.tt = t;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         ServerController serverController = ServerController.shared();
         serverController.idGet();
         serverController.messageGet();
+        MessageController messageController = MessageController.shared();
+        messageController.getMessages();
         // hmm: is this Dependency Injection?
 //        YouAreEll urlhandler = new YouAreEll(
 //            new TransactionController(

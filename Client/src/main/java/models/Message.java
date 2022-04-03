@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -24,19 +23,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 *
  */
 public class Message implements Comparable {
-
+    @JsonProperty("message")
     private String message = "";
+    @JsonProperty("toid")
     private String toId = "";
+    @JsonProperty("fromid")
     private String fromId = "";
+    @JsonProperty("timestamp")
     private String timestamp = "";
-    private String sequence = "";
+    @JsonProperty("sequence")
+    private String seqId = "";
 
     public Message (String message, String fromId, String toId, String timestamp, String sequence) {
         this.message = message;
         this.fromId = fromId;
         this.toId = toId;
         this.timestamp = timestamp;
-        this.sequence = sequence;
+        this.seqId = sequence;
     }
 
     public Message (String message, String fromId) {
@@ -48,11 +51,11 @@ public class Message implements Comparable {
 
     @Override
     public String toString() {
-        return "to: " + this.toId + "\nfrom: "+ this.fromId + "\n" + this.message + "\n----\n";
+        return seqId +"\n" + "to: " + this.toId + "\nfrom: "+ this.fromId + "\n" + this.message + "\n----\n";
     }
 
     public int compareTo(Object o) {
-        return this.sequence.compareTo(((Message) o).getSeqId());
+        return this.seqId.compareTo(((Message) o).getSeqId());
     }
 
     public String getMessage() {
@@ -84,6 +87,6 @@ public class Message implements Comparable {
     }
 
     public String getSeqId() {
-        return sequence;
+        return seqId;
     }
 }
