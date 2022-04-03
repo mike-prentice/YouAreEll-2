@@ -1,6 +1,12 @@
 package controllers;
 
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import models.Id;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -9,7 +15,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ServerController<JsonString> {
     HttpURLConnection con;
@@ -109,13 +117,29 @@ public class ServerController<JsonString> {
     // send the server a get with url
     // return json from server
 //    }
-//    public JsonString idPost(Id) {
+   public JsonString idPost(Id id) throws JsonProcessingException {
+       try {
+           URL url = new URL(rootURL + "/ids/");
+           con = (HttpURLConnection) url.openConnection();
+           con.setRequestMethod("POST");
+           con.setConnectTimeout(5000);
+           con.setReadTimeout(5000);
+       } catch (ProtocolException e) {
+           e.printStackTrace();
+       }catch (IOException e){
+           e.printStackTrace();
+       }
+       ObjectMapper objectMapper = new ObjectMapper();
+       ArrayList<Id> postId = new ArrayList<Id>();
+        postId = objectMapper.readValue(rootURL + "/ids", new TypeReference<>() {
+        });
+        return (JsonString) postId.toString();
 //        // url -> /ids/
 //        // create json from Id
 //        // request
 //        // reply
 //        // return json
-//    }
+    }
 //    public JsonString idPut(Id) {
 //        // url -> /ids/
 //    }

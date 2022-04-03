@@ -31,8 +31,10 @@ public class YouAreEll {
     public String MakeURLCall(String info) throws JsonProcessingException {
         if(info.equals("/ids")) {
             return get_ids();
-        }else {
+        }else if (info.equals("/messages")){
             return get_messages();
+        }else {
+            return post_Ids();
         }
     }
 
@@ -56,6 +58,11 @@ public class YouAreEll {
             show += view.toString(i) + "\n";
         }
         return show;
+        //return MakeURLCall("/messages", "GET", "");
+    }
+    public String post_Ids() throws JsonProcessingException {
+        tt.postId("mike", "mrising");
+        return "Success";
         //return MakeURLCall("/messages", "GET", "");
     }
 

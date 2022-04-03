@@ -26,7 +26,7 @@ public class TransactionController {
         return messages;
     }
 
-    public String postId(String idtoRegister, String githubName) {
+    public String postId(String idtoRegister, String githubName) throws JsonProcessingException {
         Id tid = new Id(idtoRegister, githubName);
         tid = idCtrl.postId(tid);
         return ("Id registered.");

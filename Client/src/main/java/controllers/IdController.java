@@ -23,12 +23,16 @@ public class IdController {
         ids = objectMapper.readValue(getIds, new TypeReference<>() {
         });
         for (Id i : ids) {
-            allIds.put(i.getUid(), i);
+            allIds.put(i.getGithub(), i);
         }
         return ids;
     }
 
-    public Id postId(Id id) {
+    public Id postId(Id id) throws JsonProcessingException {
+        //id = new Id("mrising", "mp");
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValueAsString(id);
+        ServerController.shared().idPost(id);
         // create json from id
         // call server, get json result Or error
         // result json to Id obj
