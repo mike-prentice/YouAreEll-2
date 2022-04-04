@@ -79,11 +79,14 @@ public class MessageController {
     }
 
 
-    public Message postMessage(Id myId, Id toId, Message msg) throws JsonProcessingException {
-        Message msgToSend = new Message("mrising", "mrising", "hello mike");
-        ServerController.shared().messagePost(msgToSend);
-        return null;
+//    public Message postMessage(Id myId, Id toId, Message msg) throws JsonProcessingException {
+//        return null;
+//    }
+
+
+    public void postMessage(Message message) throws JsonProcessingException {
+        message = new Message("It worked!", "mrising", "-");
+        ServerController.shared().messagePost(message);
+
     }
-
-
 }

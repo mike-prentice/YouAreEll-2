@@ -31,6 +31,7 @@ public class YouAreEll {
         System.out.println(urlhandler.MakeURLCall("/ids"));//, "GET", ""));
         System.out.println(urlhandler.MakeURLCall("/messages"));//, "GET", ""));
         System.out.println(urlhandler.MakeURLCall("/post"));
+        System.out.println(urlhandler.MakeURLCall("/message"));
     }
 
     public String MakeURLCall(String info) throws JsonProcessingException {
@@ -38,7 +39,9 @@ public class YouAreEll {
             return get_ids();
         }else if (info.equals("/messages")){
             return get_messages();
-        }else {
+        }else if (info.equals("/message")){
+            return post_Message();
+        }else{
             return post_Ids();
         }
     }
@@ -73,7 +76,7 @@ public class YouAreEll {
     }
     public String post_Message() throws JsonProcessingException {
         MessageController messageController = new MessageController();
-        //messageController.postMessage(new Message(m));
+        messageController.postMessage(new Message());
         return "Message Posted";
         //return MakeURLCall("/messages", "GET", "");
     }

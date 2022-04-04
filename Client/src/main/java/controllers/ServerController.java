@@ -163,10 +163,10 @@ public class ServerController<JsonString> {
 //        // return json
     }
 
-    public JsonString messagePost(Message msg) throws JsonProcessingException {
+    public JsonString messagePost(Message message) throws JsonProcessingException {
         StringBuilder response = null;
         try {
-            URL url = new URL(rootURL + "/ids");
+            URL url = new URL(rootURL + "/messages");
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setConnectTimeout(5000);
@@ -175,7 +175,7 @@ public class ServerController<JsonString> {
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
             ObjectMapper objectMapper = new ObjectMapper();
-            String out = objectMapper.writeValueAsString(msg);
+            String out = objectMapper.writeValueAsString(message);
             OutputStream os = con.getOutputStream();
             byte[] input = out.getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
