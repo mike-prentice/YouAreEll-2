@@ -71,6 +71,12 @@ public class YouAreEll {
         return "New Id Created";
         //return MakeURLCall("/messages", "GET", "");
     }
+    public String post_Message() throws JsonProcessingException {
+        MessageController messageController = new MessageController();
+        //messageController.postMessage(new Message(m));
+        return "Message Posted";
+        //return MakeURLCall("/messages", "GET", "");
+    }
 
 
 }

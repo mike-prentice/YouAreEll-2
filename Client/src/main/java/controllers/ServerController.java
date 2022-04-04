@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Id;
+import models.Message;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -161,10 +162,47 @@ public class ServerController<JsonString> {
 //        // reply
 //        // return json
     }
+
+    public JsonString messagePost(Message msg) throws JsonProcessingException {
+        StringBuilder response = null;
+        try {
+            URL url = new URL(rootURL + "/ids");
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
+            con.setRequestProperty("Id", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String out = objectMapper.writeValueAsString(msg);
+            OutputStream os = con.getOutputStream();
+            byte[] input = out.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+            int code = con.getResponseCode();
+            System.out.println(code);
+
+
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
+                response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println(response);
+            }
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//
+        return (JsonString) response;
 //    public JsonString idPut(Id) {
 //        // url -> /ids/
 //    }
-
+    }
 }
 
 

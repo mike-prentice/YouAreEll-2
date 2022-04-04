@@ -42,14 +42,15 @@ public class Message implements Comparable {
         this.seqId = sequence;
     }
 
-    public Message(String message, String fromId) {
+    public Message(String message, String fromId, String toId) {
         this.message = message;
         this.fromId = fromId;
-        this.toId = "";
+        this.toId = toId;
     }
 
     public Message() {
     }
+
 
     @Override
     public String toString() {
