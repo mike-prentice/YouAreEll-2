@@ -15,14 +15,18 @@ import java.util.List;
 
 public class IdControllerTest extends TestCase {
 
-
     public void testGetIds() throws JsonProcessingException {
         IdController idcont = new IdController();
         ArrayList<Id> ids = idcont.getIds();
         Assert.assertTrue(ids.size() != 0);
     }
 
-    public void testPostId() {
+    public void testPostId() throws JsonProcessingException {
+        IdController idcont = new IdController();
+        Id id = new Id("test3", "test3");
+        idcont.postId(id);
+        idcont.getIds();
+        Assert.assertTrue(idcont.allIds.containsKey("test3"));
     }
 
     public void testPutId() {

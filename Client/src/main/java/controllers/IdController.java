@@ -11,7 +11,7 @@ import models.Id;
 import org.json.simple.JSONArray;
 
 public class IdController {
-    private final HashMap<String, Id> allIds = new HashMap<>();
+    public final HashMap<String, Id> allIds = new HashMap<>();
 
     Id myId;
 
@@ -29,7 +29,6 @@ public class IdController {
     }
 
     public Id postId(Id id) throws JsonProcessingException {
-        id = new Id("test", "test2");
         ServerController.shared().idPost(id);
         // create json from id
         // call server, get json result Or error
