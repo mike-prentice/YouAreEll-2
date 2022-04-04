@@ -141,9 +141,9 @@ public class ServerController<JsonString> {
 
             try (BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
-                response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
+                    response = new StringBuilder();
+                    String responseLine = null;
+                    while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
                 System.out.println(response);

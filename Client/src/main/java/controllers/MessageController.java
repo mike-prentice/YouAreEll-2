@@ -16,23 +16,22 @@ public class MessageController {
     // why a HashSet??
 
 
-    private static MessageController mesCon;
+//    private static MessageController mesCon;
+//
+//    static {
+//        try {
+//            mesCon = new MessageController();
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    static {
-        try {
-            mesCon = new MessageController();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static MessageController shared() {
-        return mesCon;
-    }
+    //public static MessageController shared() {
+     //   return mesCon;
+    //}
 
     public MessageController() throws JsonProcessingException {
-        JSONArray messagesJSON = serverController.messageGet();
-        String messageString = messagesJSON.toString();
+        String messageString = String.valueOf(serverController.messageGet());
         ObjectMapper objectMapper = new ObjectMapper();
         messagesSeen = objectMapper.readValue(messageString, new TypeReference<>() {
         });
@@ -72,7 +71,7 @@ public class MessageController {
     public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
         ArrayList<Message> msgFromFriend = new ArrayList<>();
         for (Message m : messagesSeen) {
-            if (m.getFromId().equals(friendId) && m.getToId().equals(myId)) {
+            if (m.getFromId().equals(friendId.getGithub()) && m.getToId().equals(myId.getGithub())) {
                 msgFromFriend.add(m);
             }
         }

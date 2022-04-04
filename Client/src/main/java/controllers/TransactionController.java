@@ -21,7 +21,7 @@ public class TransactionController {
         return ids;
     }
 
-    public List<Message> getMessages() throws JsonProcessingException {
+    public List<Message> getMessages() {
         List<Message> messages = msgCtrl.getMessages();
         return messages;
     }

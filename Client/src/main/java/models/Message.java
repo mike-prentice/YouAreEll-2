@@ -53,7 +53,7 @@ public class Message implements Comparable {
 
     @Override
     public String toString() {
-        return seqId + "\n" + "to: " + this.toId + "\nfrom: " + this.fromId + "\n" + this.message + "\n----\n";
+        return seqId + "\n" + timestamp + "\n" + "to: " + this.toId + "\nfrom: " + this.fromId + "\n" + this.message + "\n----\n";
     }
 
     public int compareTo(Object o) {
