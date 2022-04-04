@@ -26,6 +26,7 @@ public class YouAreEll {
                 ));
         System.out.println(urlhandler.MakeURLCall("/ids"));//, "GET", ""));
         System.out.println(urlhandler.MakeURLCall("/messages"));//, "GET", ""));
+        System.out.println(urlhandler.MakeURLCall("/post"));
     }
 
     public String MakeURLCall(String info) throws JsonProcessingException {
@@ -61,8 +62,9 @@ public class YouAreEll {
         //return MakeURLCall("/messages", "GET", "");
     }
     public String post_Ids() throws JsonProcessingException {
-        tt.postId("mike", "mrising");
-        return "Success";
+        IdController idController = new IdController();
+        idController.postId(new Id());
+        return "New Id Created";
         //return MakeURLCall("/messages", "GET", "");
     }
 

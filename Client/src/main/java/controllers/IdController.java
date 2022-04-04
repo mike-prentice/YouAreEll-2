@@ -29,9 +29,7 @@ public class IdController {
     }
 
     public Id postId(Id id) throws JsonProcessingException {
-        //id = new Id("mrising", "mp");
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValueAsString(id);
+        id = new Id("test", "test2");
         ServerController.shared().idPost(id);
         // create json from id
         // call server, get json result Or error

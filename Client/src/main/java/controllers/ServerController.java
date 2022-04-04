@@ -13,10 +13,12 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ServerController<JsonString> {
@@ -117,23 +119,47 @@ public class ServerController<JsonString> {
     // send the server a get with url
     // return json from server
 //    }
-   public JsonString idPost(Id id) throws JsonProcessingException {
-       try {
-           URL url = new URL(rootURL + "/ids/");
-           con = (HttpURLConnection) url.openConnection();
-           con.setRequestMethod("POST");
-           con.setConnectTimeout(5000);
-           con.setReadTimeout(5000);
-       } catch (ProtocolException e) {
-           e.printStackTrace();
-       }catch (IOException e){
-           e.printStackTrace();
-       }
-       ObjectMapper objectMapper = new ObjectMapper();
-       ArrayList<Id> postId = new ArrayList<Id>();
-        postId = objectMapper.readValue(rootURL + "/ids", new TypeReference<>() {
-        });
-        return (JsonString) postId.toString();
+    public JsonString idPost(Id id) throws JsonProcessingException {
+        StringBuilder response = null;
+        try {
+            URL url = new URL(rootURL + "/ids");
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
+            con.setRequestProperty("Id", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String out = objectMapper.writeValueAsString(id);
+            OutputStream os = con.getOutputStream();
+            byte[] input = out.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+            int code = con.getResponseCode();
+            System.out.println(code);
+
+
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
+                response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println(response);
+            }
+
+
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//       ObjectMapper objectMapper = new ObjectMapper();
+//       ArrayList<Id> postId = new ArrayList<Id>();
+//        postId = objectMapper.readValue(rootURL + "/ids", new TypeReference<>() {
+//        });
+        return (JsonString) response;
 //        // url -> /ids/
 //        // create json from Id
 //        // request
