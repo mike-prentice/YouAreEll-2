@@ -148,17 +148,12 @@ public class ServerController<JsonString> {
                 }
                 System.out.println(response);
             }
-
-
         } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-//       ObjectMapper objectMapper = new ObjectMapper();
-//       ArrayList<Id> postId = new ArrayList<Id>();
-//        postId = objectMapper.readValue(rootURL + "/ids", new TypeReference<>() {
-//        });
+//
         return (JsonString) response;
 //        // url -> /ids/
 //        // create json from Id

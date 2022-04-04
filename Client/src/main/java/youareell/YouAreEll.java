@@ -17,6 +17,10 @@ public class YouAreEll {
         this.tt = t;
     }
 
+    public YouAreEll(MessageController messageController, IdController idController) {
+   this.tt = new TransactionController(messageController, idController);
+    }
+
     public static void main(String[] args) throws JsonProcessingException {
 
         //hmm: is this Dependency Injection?
