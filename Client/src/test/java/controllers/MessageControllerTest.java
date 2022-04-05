@@ -45,6 +45,9 @@ public class MessageControllerTest extends TestCase {
         assertTrue(actual.size() == 0);
     }
 
-    public void testPostMessage() {
+    public void testPostMessage() throws JsonProcessingException {
+        Message message = new Message("mike-prentice", "-", "It Worked!");
+       String sourceId = "mike-prentice";
+        messages.postMessage(message, sourceId);
     }
 }

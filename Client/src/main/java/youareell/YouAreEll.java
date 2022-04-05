@@ -76,7 +76,7 @@ public class YouAreEll {
     }
     public String post_Message() throws JsonProcessingException {
         MessageController messageController = new MessageController();
-        messageController.postMessage(new Message());
+        //
         return "Message Posted";
         //return MakeURLCall("/messages", "GET", "");
     }

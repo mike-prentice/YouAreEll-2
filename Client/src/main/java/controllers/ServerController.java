@@ -163,15 +163,15 @@ public class ServerController<JsonString> {
 //        // return json
     }
 
-    public JsonString messagePost(Message message) throws JsonProcessingException {
+    public JsonString messagePost(Message message, String sourceId) throws JsonProcessingException {
         StringBuilder response = null;
         try {
-            URL url = new URL(rootURL + "/messages");
+            URL url = new URL(rootURL + "/ids/" + sourceId + "/messages");
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setConnectTimeout(5000);
             con.setReadTimeout(5000);
-            con.setRequestProperty("Id", "application/json; utf-8");
+            con.setRequestProperty("Message", "application/json; utf-8");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -183,15 +183,15 @@ public class ServerController<JsonString> {
             System.out.println(code);
 
 
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
-                response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                System.out.println(response);
-            }
+//            try (BufferedReader br = new BufferedReader(
+//                    new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
+//                response = new StringBuilder();
+//                String responseLine = null;
+//                while ((responseLine = br.readLine()) != null) {
+//                    response.append(responseLine.trim());
+//                }
+//                System.out.println(response);
+//            }
         } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {

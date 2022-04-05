@@ -29,7 +29,8 @@ public class IdController {
     }
 
     public Id postId(Id id) throws JsonProcessingException {
-        //ServerController.shared().idPost(id);
+        id = new Id("test", "test");
+        ServerController.shared().idPost(id);
         // create json from id
         // call server, get json result Or error
         // result json to Id obj

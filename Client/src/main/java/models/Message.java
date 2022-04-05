@@ -1,11 +1,9 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,24 +27,29 @@ public class Message implements Comparable {
     private String toId = "";
     @JsonProperty("fromid")
     private String fromId = "";
-    @JsonProperty("timestamp")
-    private String timestamp = "";
+    private String timestamp = "-";
     @JsonProperty("sequence")
-    private String seqId = "";
+    private String seqId = "-";
 
-    public Message(String message, String fromId, String toId, String timestamp, String sequence) {
-        this.message = message;
-        this.fromId = fromId;
-        this.toId = toId;
-        this.timestamp = timestamp;
-        this.seqId = sequence;
-    }
 
-    public Message(String message, String fromId, String toId) {
+    public Message(String fromId, String toId, String message){
         this.message = message;
         this.fromId = fromId;
         this.toId = toId;
     }
+//    public Message(String message, String fromId, String toId, String timestamp, String sequence) {
+//        this.message = message;
+//        this.fromId = fromId;
+//        this.toId = toId;
+//        this.timestamp = timestamp;
+//        this.seqId = sequence;
+//    }
+
+//    public Message(String message, String fromId, String toId) {
+//        this.message = message;
+//        this.fromId = fromId;
+//        this.toId = toId;
+//    }
 
     public Message() {
     }
@@ -85,11 +88,17 @@ public class Message implements Comparable {
         this.fromId = fromId;
     }
 
+    @JsonIgnore
     public String getTimestamp() {
         return timestamp;
     }
 
     public String getSeqId() {
         return seqId;
+    }
+
+    @JsonProperty
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

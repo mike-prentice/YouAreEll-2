@@ -84,9 +84,10 @@ public class MessageController {
 //    }
 
 
-    public void postMessage(Message message) throws JsonProcessingException {
-        message = new Message("It worked!", "mrising", "-");
-        ServerController.shared().messagePost(message);
+    public void postMessage(Message message, String sourceId) throws JsonProcessingException {
+         //message = new Message("It worked!", "mrising", "-");
+        //sourceId = "mrising";
+        ServerController.shared().messagePost(message, sourceId);
 
     }
 }
